@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Box, Heading, VStack, Text } from '@chakra-ui/react';
 import {
   MapContainer,
@@ -10,7 +11,6 @@ import {
 } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
-import { useEffect, useState } from 'react';
 
 interface Location {
   id: string;
@@ -73,11 +73,14 @@ export default function RoutePage() {
   const [userPosition, setUserPosition] = useState<{ lat: number; lng: number } | null>(null);
 
   useEffect(() => {
+     if (typeof window !== 'undefined'){
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (raw) {
       const parsed: Location[] = JSON.parse(raw);
       setLocations(parsed);
     }
+     }
+
   }, []);
 
   useEffect(() => {
