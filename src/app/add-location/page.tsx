@@ -76,15 +76,20 @@ export default function AddLocationPage() {
   const [locations, setLocations] = useState<LocationData[]>([]);
 
   //localStorage'tan yükle
-  useEffect(() => {
+useEffect(() => {
+  if (typeof window !== 'undefined') {
     const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (raw) setLocations(JSON.parse(raw));
-  }, []);
+  }
+}, []);
 
   //localStorage'a yaz
-  useEffect(() => {
+useEffect(() => {
+  if (typeof window !== 'undefined') {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(locations));
-  }, [locations]);
+  }
+}, [locations]);
+
 
   // Kaydet
   const handleSave = () => {
