@@ -84,6 +84,7 @@ export default function RoutePage() {
   }, []);
 
   useEffect(() => {
+      if (typeof window !== 'undefined'){
     if (!navigator.geolocation) return;
     navigator.geolocation.getCurrentPosition(
       (pos) => {
@@ -96,7 +97,7 @@ export default function RoutePage() {
         alert('Konum bilgisi alınamadı.');
       }
     );
-  }, []);
+  }}, []);
 
   const sortedLocations =
     userPosition && locations.length > 0
