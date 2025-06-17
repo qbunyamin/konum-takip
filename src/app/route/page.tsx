@@ -100,10 +100,16 @@ export default function RoutePage() {
       ? sortByDistance(userPosition, locations)
       : locations;
 
-  const routePoints: [number, number][] =
-    userPosition && sortedLocations.length > 0
-      ? [[userPosition.lat, userPosition.lng], ...sortedLocations.map((l) => [l.lat, l.lng])]
-      : [];
+
+     let routePoints: [number, number][] = [];
+
+if (userPosition && sortedLocations.length > 0) {
+  routePoints = [
+    [userPosition.lat, userPosition.lng],
+    ...sortedLocations.map((l) => [l.lat, l.lng] as [number, number]),
+  ];
+}
+
 
   const totalDistance = routePoints.length > 1 ? getTotalRouteDistance(routePoints) : 0;
 
